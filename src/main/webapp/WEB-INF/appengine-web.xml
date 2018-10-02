@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <application>epam-gcp-214812</application>
+    <version>20181001t001416</version>
+    <runtime>java8</runtime>
+    <threadsafe>true</threadsafe>
+
+    <automatic-scaling>
+        <max-instances>1</max-instances>
+    </automatic-scaling>
+
+    <!-- [START env_variables] -->
+    <env-variables>
+        <env-var name="ENDPOINTS_SERVICE_NAME" value="epam-gcp-214812.appspot.com" />
+    </env-variables>
+     <static-files> <include path="/*" > <http-header name="Access-Control-Allow-Origin" value="*" /> </include> </static-files>
+    <!-- [END env_variables] -->
+</appengine-web-app>

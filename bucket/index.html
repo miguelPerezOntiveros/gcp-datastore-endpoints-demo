@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Task List</title>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<!-- Datatables -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+	<!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 style="padding-top: 2em;">To do list.</h2>
+				<form id="taskForm" style="border: 1px solid black; padding: 10px;">
+					<h5>Add new entry.</h5>
+					Title: <input type="text" name="title" style="position: absolute; left: 5em;"><br>
+					Body: <input type="text" name="body" style="position: absolute; left: 5em;"><br>
+					<div>
+						<input type="submit" style="position: absolute; right: 20px;">						
+					</div>
+					<br>
+				</form>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-md-12">
+				<table id="taksTable"></table>	
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		var dataTable = null;
+
+		$('#taskForm').on('submit', function(e){
+			e.preventDefault();
+			gapi.client.list.taskList.createTask({title: $('input[name=title]').val(), body: $('input[name=body]').val()}).execute(
+				function(result){
+					if(!result.error){
+						console.log('posted');
+						if(dataTable)
+							dataTable.destroy();
+						loadTasks();
+					}
+					$('#taskForm').find('input:text').val('');
+				}
+			)
+		})
+		function loadTasks(){
+			gapi.client.list.taskList.getTasks().execute(
+				function(result) {
+					console.log(result.result);
+					dataTable = $('#taksTable').DataTable( {
+				        "data": JSON.parse(result.result.result).map(e => [e.propertyMap.title, e.propertyMap.body]),
+				        "columns": [
+				            { "title": "title" },
+				            { "title": "body" }
+				        ]
+				    } );
+		    });
+		}
+		apisToLoad = 2;
+		function apiLoaded(){
+			if(--apisToLoad == 0)
+				gapi.auth.authorize(
+				    {
+				      client_id: "591358445297-t73o53vpohfbgomvj74laqo55snl9vn5.apps.googleusercontent.com",
+				      scope: ["https://www.googleapis.com/auth/userinfo.email", "profile"],
+				      immediate: true
+				    },
+				    loadTasks
+	  			)
+		}
+		function init() {
+			gapi.client.load("oauth2", "v2", apiLoaded);
+			gapi.client.load(
+				"list", "v1", apiLoaded, "https://epam-gcp-214812.appspot.com/_ah/api"
+				);
+		}
+	</script>
+	<script src="https://apis.google.com/js/client.js?onload=init"></script>
+	
+</body>
+</html>

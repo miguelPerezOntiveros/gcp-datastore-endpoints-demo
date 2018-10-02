@@ -1,0 +1,149 @@
+<!--
+ Copyright 2016 Google Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <groupId>com.epamx.sharingIsCaring.TaskList</groupId>
+    <artifactId>taskList</artifactId>
+
+    <prerequisites>
+        <maven>3.1</maven>
+    </prerequisites>
+
+    <properties>
+        <appengine.app.appId>epam-gcp-214812</appengine.app.appId>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <endpoints.framework.version>2.0.13</endpoints.framework.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <appengine.target.version>1.9.65</appengine.target.version>
+    </properties>
+
+    <dependencies>
+        <!-- Compile/runtime dependencies -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${appengine.target.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.endpoints</groupId>
+            <artifactId>endpoints-framework</artifactId>
+            <version>${endpoints.framework.version}</version>
+        </dependency>
+        <!-- [START api_management] -->
+        <dependency>
+            <groupId>com.google.endpoints</groupId>
+            <artifactId>endpoints-management-control-appengine</artifactId>
+            <version>1.0.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.endpoints</groupId>
+            <artifactId>endpoints-framework-auth</artifactId>
+            <version>1.0.11</version>
+        </dependency>
+        <!-- [END api_management] -->
+        <!-- [START Datastore] -->
+        <dependency>
+          <groupId>com.google.cloud</groupId>
+          <artifactId>google-cloud-datastore</artifactId>
+          <version>1.40.0</version>
+          <!-- <exclusions>
+            <exclusion>
+                  <groupId>com.google.protobuf</groupId>
+                  <artifactId>protobuf-java</artifactId>
+            </exclusion>
+            <exclusion>
+                  <groupId>com.google.protobuf</groupId>
+                  <artifactId>protobuf-java-util</artifactId>
+            </exclusion>
+          </exclusions> -->
+        </dependency>
+    </dependencies>
+
+       
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${appengine.target.version}</version>
+                <configuration>
+                    <!-- deploy configuration -->
+                </configuration>
+            </plugin>
+            <!-- [START endpoints_plugin] -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>endpoints-framework-maven-plugin</artifactId>
+                <version>1.0.2</version>
+                <configuration>
+                    <!-- plugin configuration -->
+                    <hostname>
+
+                        -gcp-214812.appspot.com</hostname>
+                </configuration>
+            </plugin>
+            <!-- [END endpoints_plugin] -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>2.5.1</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <archiveClasses>true</archiveClasses>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${appengine.target.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+
+<!--    <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+ -->                
+</project>
