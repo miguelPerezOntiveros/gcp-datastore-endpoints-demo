@@ -56,12 +56,12 @@
         <dependency>
             <groupId>com.google.endpoints</groupId>
             <artifactId>endpoints-management-control-appengine</artifactId>
-            <version>1.0.11</version>
+            <version>1.0.10</version>
         </dependency>
         <dependency>
             <groupId>com.google.endpoints</groupId>
             <artifactId>endpoints-framework-auth</artifactId>
-            <version>1.0.11</version>
+            <version>1.0.10</version>
         </dependency>
         <!-- [END api_management] -->
         <!-- [START Datastore] -->
@@ -100,9 +100,7 @@
                 <version>1.0.2</version>
                 <configuration>
                     <!-- plugin configuration -->
-                    <hostname>
-
-                        -gcp-214812.appspot.com</hostname>
+                    <hostname>epam-gcp-214812.appspot.com</hostname>
                 </configuration>
             </plugin>
             <!-- [END endpoints_plugin] -->

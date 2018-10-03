@@ -69,6 +69,10 @@
 				    } );
 		    });
 		}
+		function userAuthed(response){
+			if(!response.error)
+				loadTasks();
+		}
 		apisToLoad = 2;
 		function apiLoaded(){
 			if(--apisToLoad == 0)
@@ -76,9 +80,9 @@
 				    {
 				      client_id: "591358445297-t73o53vpohfbgomvj74laqo55snl9vn5.apps.googleusercontent.com",
 				      scope: ["https://www.googleapis.com/auth/userinfo.email", "profile"],
-				      immediate: true
+				      immediate: false
 				    },
-				    loadTasks
+				    userAuthed
 	  			)
 		}
 		function init() {
