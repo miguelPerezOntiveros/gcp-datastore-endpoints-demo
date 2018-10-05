@@ -17,6 +17,11 @@
 - src/main/java/com/epamx/sharingIsCaring/endpoints/Task.java
 - src/main/java/com/epamx/sharingIsCaring/endpoints/Result.java
 
+# Notes
+	https://swagger.io/
+	Standard API definitions can get you automatic documentation, code and developer portals. 
+	We need accuracy, expressiveness and readibility from an API contract: https://youtu.be/bR9hEyZ9774?t=759
+
 # References
 - https://cloud.google.com/endpoints/docs/frameworks/java/adding-api-management
 - https://cloud.google.com/endpoints/docs/frameworks/java/set-up-environment
