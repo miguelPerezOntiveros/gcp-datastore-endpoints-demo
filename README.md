@@ -17,6 +17,9 @@
 - src/main/java/com/epamx/sharingIsCaring/endpoints/Task.java
 - src/main/java/com/epamx/sharingIsCaring/endpoints/Result.java
 
+# Architectural diagram
+![diagram](diagram.png)
+
 # Notes
 	https://swagger.io/
 	Standard API definitions can get you automatic documentation, code and developer portals. 
