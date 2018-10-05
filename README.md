@@ -18,7 +18,7 @@
 - src/main/java/com/epamx/sharingIsCaring/endpoints/Result.java
 
 # Architectural diagram
-![diagram](diagram.png =250x)
+![diagram](diagram.png)
 
 # Notes
 	https://swagger.io/
