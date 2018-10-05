@@ -27,3 +27,4 @@
 - https://cloud.google.com/endpoints/docs/frameworks/java/set-up-environment
 - https://github.com/GoogleCloudPlatform/appengine-endpoints-helloworld-java-maven/blob/master/pom.xml
 - https://github.com/GoogleCloudPlatform/getting-started-java/blob/master/appengine-standard-java8/helloworld/pom.xml
+- https://cloud.google.com/endpoints/docs/frameworks/java/annotations
