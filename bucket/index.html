@@ -15,6 +15,9 @@
 </head>
 <body>
 	<div class="container">
+		<nav>
+			<span class="nav-welcome"></span>
+		</nav>
 		<div class="row">
 			<div class="col-md-6">
 				<h2 style="padding-top: 2em;">To do list.</h2>
@@ -41,7 +44,6 @@
 
 	<script type="text/javascript">
 		var dataTable = null;
-
 		$('#taskForm').on('submit', function(e){
 			e.preventDefault();
 			gapi.client.list.taskList.createTask({title: $('input[name=title]').val(), body: $('input[name=body]').val()}).execute(
@@ -70,8 +72,22 @@
 		    });
 		}
 		function userAuthed(response){
-			if(!response.error)
+			if(response.error){
+				gapi.auth.authorize(
+					{
+						client_id: "591358445297-t73o53vpohfbgomvj74laqo55snl9vn5.apps.googleusercontent.com",				
+						scope: ["https://www.googleapis.com/auth/userinfo.email", "profile"],
+						immediate: false
+					},
+					userAuthed);	
+			} else{
 				loadTasks();
+				gapi.client.load('oauth2', 'v2', function () {
+				  gapi.client.oauth2.userinfo.get().execute(function (resp) {
+				    $('.nav-welcome').text('Welcome ' + resp.email);
+				  })
+				});
+			}
 		}
 		apisToLoad = 2;
 		function apiLoaded(){
@@ -80,7 +96,7 @@
 				    {
 				      client_id: "591358445297-t73o53vpohfbgomvj74laqo55snl9vn5.apps.googleusercontent.com",
 				      scope: ["https://www.googleapis.com/auth/userinfo.email", "profile"],
-				      immediate: false
+				      immediate: true
 				    },
 				    userAuthed
 	  			)

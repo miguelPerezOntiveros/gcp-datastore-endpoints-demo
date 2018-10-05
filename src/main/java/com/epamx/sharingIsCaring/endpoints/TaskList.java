@@ -57,7 +57,7 @@ public class TaskList {
   }
 
   @ApiMethod(path="task")
-  public Result getTasks(User user, Result id) {
+  public Result getTasks(User user) {
     Query query = new Query("Task").setFilter(new FilterPredicate("user", FilterOperator.EQUAL, user.getEmail()));
     List<com.google.appengine.api.datastore.Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
     log.info(new GsonBuilder().create().toJson(results));
